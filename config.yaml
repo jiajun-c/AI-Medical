@@ -1,0 +1,11 @@
+db:
+  dsn: postgres://admin:admin@0.0.0.0:5433/hust?sslmode=disable
+  driver: postgres
+
+api:
+  addr: ":8080"
+
+auth:
+  secret-key: "opensource"
+  username: "admin"
+  password: "admin"

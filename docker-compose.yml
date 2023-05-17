@@ -1,0 +1,16 @@
+version: "3"
+
+services:
+  db:
+    image: postgres:12-alpine
+    container_name: ai-db
+    restart: on-failure
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
+      TZ: Asia/Shanghai
+    ports:
+      - "25432:5432"
+    volumes:
+      - "./data/db:/var/lib/postgresql/data"
+      - "./scripts/init.sql:/docker-entrypoint-initdb.d/create_tables.sql"
