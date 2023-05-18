@@ -1,5 +1,6 @@
 version: "3"
-
+networks:
+  AI-network:
 services:
   db:
     image: postgres:12-alpine
@@ -14,3 +15,17 @@ services:
     volumes:
       - "./data/db:/var/lib/postgresql/data"
       - "./scripts/init.sql:/docker-entrypoint-initdb.d/create_tables.sql"
+    networks:
+      - AI-network
+  backend:
+    image: ai-backend:latest
+    container_name: ai-backend
+    restart: on-failure
+    volumes:
+      - "./config.yaml:/config.yaml"
+    depends_on:
+      - db
+    ports:
+      - "28080:28080"
+    networks:
+      - AI-network
