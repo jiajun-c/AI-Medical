@@ -1,6 +1,7 @@
 package middlewares
 
 import (
+	"ai-medical/crud"
 	jwt "github.com/appleboy/gin-jwt/v2"
 	"github.com/gin-gonic/gin"
 	log "github.com/sirupsen/logrus"
@@ -53,16 +54,22 @@ func Auth() *jwt.GinJWTMiddleware {
 			userID := loginVals.Username
 			password := loginVals.Password
 
-			Username := "admin"
-			Password := "admin"
-			log.Infof("The username: %s The password: %s", Username, Password)
-			if userID == Username && password == Password {
+			//Username := "admin"
+			//Password := "admin"
+			//log.Infof("The username: %s The password: %s", Username, Password)
+			find := crud.SearchUser(userID, password)
+			if find {
 				return &User{
 					UserName: userID,
-					//LastName:  "Bo-Yi",
-					//FirstName: "Wu",
 				}, nil
 			}
+			//if userID == Username && password == Password {
+			//	return &User{
+			//		UserName: userID,
+			//		//LastName:  "Bo-Yi",
+			//		//FirstName: "Wu",
+			//	}, nil
+			//}
 
 			return nil, jwt.ErrFailedAuthentication
 		},

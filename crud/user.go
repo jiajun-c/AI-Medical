@@ -2,6 +2,7 @@ package crud
 
 import (
 	"ai-medical/model"
+	"errors"
 	log "github.com/sirupsen/logrus"
 )
 
@@ -12,4 +13,19 @@ func SearchUser(username string, password string) bool {
 		return false
 	}
 	return get
+}
+
+func RegisterUser(username string, password string) error {
+	find := SearchUser(username, password)
+	if find {
+		return errors.New("user already registered")
+	}
+	_, err := Engine.InsertOne(model.User{
+		Username: username,
+		Password: password,
+	})
+	if err != nil {
+		return err
+	}
+	return nil
 }

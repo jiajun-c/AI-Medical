@@ -1,9 +1,9 @@
 db:
-  dsn: postgres://admin:admin@0.0.0.0:5433/hust?sslmode=disable
+  dsn: postgres://admin:admin@0.0.0.0:25432/ai?sslmode=disable
   driver: postgres
 
 api:
-  addr: ":8080"
+  addr: ":28080"
 
 auth:
   secret-key: "opensource"

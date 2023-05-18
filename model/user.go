@@ -1,7 +1,7 @@
 package model
 
 type User struct {
-	Name     string `json:"name" xorm:"pk"`
+	Username string `json:"username" xorm:"pk"`
 	Password string `json:"password"`
 }
 
