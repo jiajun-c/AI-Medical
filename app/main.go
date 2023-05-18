@@ -13,8 +13,8 @@ import (
 )
 
 func initConfig() {
-	path := "/home/bot/workspace/AI-Medical/config.yaml"
-	//path := "/config.yaml"
+	//path := "/home/bot/workspace/AI-Medical/config.yaml"
+	path := "/config.yaml"
 	viper.SetConfigFile(path)
 	if err := viper.ReadInConfig(); err != nil {
 		logrus.Error("failed to load config file")
