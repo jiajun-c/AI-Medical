@@ -6,6 +6,7 @@ import (
 	"ai-medical/model"
 	"encoding/json"
 	"github.com/gin-gonic/gin"
+	log "github.com/sirupsen/logrus"
 	"github.com/spf13/viper"
 	"os"
 	"strings"
@@ -70,7 +71,7 @@ func Analyze(ctx *gin.Context) {
 	}
 	points, _ := json.Marshal(poss)
 
-	crud.InsertRecord(&model.Record{
+	err = crud.InsertRecord(&model.Record{
 		Username:  username,
 		Time:      time.Now().Format(time.UnixDate),
 		OriginURL: url0,
@@ -81,11 +82,15 @@ func Analyze(ctx *gin.Context) {
 		TL:        feat.TL,
 		Points:    points,
 	})
+	if err != nil {
+		log.Error(err)
+		return
+	}
 
 	ctx.JSON(200, gin.H{
 		"pointImg":  url1,
 		"arrowImg":  url2,
-		"originUrl": url0,
+		"originImg": url0,
 		"PT":        feat.PT,
 		"MT":        feat.MT,
 		"TL":        feat.TL,
