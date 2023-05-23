@@ -1,0 +1,17 @@
+db:
+  dsn: postgres://admin:admin@ai-db:5432/ai?sslmode=disable
+#  dsn: postgres://admin:admin@127.0.0.1:25432/ai?sslmode=disable
+  driver: postgres
+
+api:
+  addr: ":28080"
+
+auth:
+  secret-key: "opensource"
+  username: "admin"
+  password: "admin"
+
+storage:
+#  path: "/home/bot/workspace/AI-Medical/"
+  url:  "https://wechat.halfcs.top/"
+  path: "/pictures/"

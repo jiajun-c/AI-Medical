@@ -1,0 +1,21 @@
+syntax = "proto3";
+option go_package = "../pb";
+//package pb;
+
+service landmark {
+  rpc GetResult(Point) returns (Feature) {}
+}
+
+message Point {
+  string name = 1;    //图片名字
+  bytes image = 2;    //图片的二进制表示
+
+}
+message Feature {
+  double PT = 1;                  //3个cobb角
+  double MT = 2;
+  double TL = 3;
+  repeated double position = 4;   //8个(x, y)坐标，从上到下，从左到右
+  bytes arrowimage = 5;           //含有箭头的图片
+  bytes pointimage = 6;           //含有点的图片
+}
